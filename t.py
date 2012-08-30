@@ -23,14 +23,18 @@ Buzz
 """
 
 
+def foo(i):
+    if i % 3 == 0:
+        print "Fizz"
+    elif i % 5 == 0:
+        print "Buzz"
+    else:
+        print i
+
+
 def main():
     for i in range(1, 21):
-        if i % 3 == 0:
-            print "Fizz"
-        elif i % 5 == 0:
-            print "Buzz"
-        else:
-            print i
+        foo(i)
 
 
 def _test():
