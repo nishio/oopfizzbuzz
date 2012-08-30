@@ -102,14 +102,11 @@ def get_twenty():
     return holder(ret(double))
 
 
-class PositiveIntegerRange(object):
-    def __init__(self, frm, to):
-        end = holder(to(succ))
-        # assert end.i > frm.i
-        self.value = frm(lambda x: end(lambda y: range(x, y)))
-
-    def __iter__(self):
-        return iter(self.value)
+def positiveIntegerRange(frm, to):
+    end = holder(to(succ))
+    # assert end.i > frm.i
+    value = frm(lambda x: end(lambda y: range(x, y)))
+    return iter(value)
 
 
 def print_(s):
@@ -143,7 +140,7 @@ def succ_and_foo(old_i):
 def main():
     global i
     i = get_zero()
-    range = PositiveIntegerRange(get_one(), get_twenty())
+    range = positiveIntegerRange(get_one(), get_twenty())
     [succ_and_foo(i) for _i in range]
 
 
