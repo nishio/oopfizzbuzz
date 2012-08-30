@@ -23,64 +23,93 @@ Buzz
 """
 
 
-class PositiveInteger(object):
-    def __init__(self):
-        self.i = int(self != self)  # zero
+def holder(x):
+    def use(f):
+        return f(x)
+    return use
 
-    def succ(self):
-        self.i += int(self == self)  # add one
 
-    def double(self):
-        self.i += self.i
+def get_zero():
+    """
+    >>> get_zero()(lambda x: x)
+    0
+    """
+    zero = int(int != int)
+    return holder(zero)
 
-    def dividable(self, by):
-        v = self.i % by.i
-        return v == -v  # mean: v == 0
 
-    def __str__(self):
-        return str(self.i)
+def succ(x):
+    """
+    >>> get_zero()(succ)
+    1
+    """
+    one = int(int == int)
+    return x + one
+
+
+def double(x):
+    """
+    >>> holder(get_zero()(succ))(double)
+    2
+    """
+    return x + x
+
+
+def get_one():
+    """
+    >>> get_one()(lambda x: x)
+    1
+    """
+    ret = get_zero()
+    return holder(ret(succ))
+
+
+def get_two():
+    """
+    >>> get_two()(lambda x: x)
+    2
+    """
+    ret = get_one()
+    return holder(ret(double))
+
+
+def get_three():
+    """
+    >>> get_three()(lambda x: x)
+    3
+    """
+    ret = get_two()
+    return holder(ret(succ))
+
+
+def get_five():
+    """
+    >>> get_five()(lambda x: x)
+    5
+    """
+    ret = get_two()
+    ret = holder(ret(double))
+    return holder(ret(succ))
+
+
+def get_twenty():
+    """
+    >>> get_twenty()(lambda x: x)
+    20
+    """
+    ret = get_five()
+    ret = holder(ret(double))
+    return holder(ret(double))
 
 
 class PositiveIntegerRange(object):
     def __init__(self, frm, to):
-        end = to
-        end.succ()
-        assert end.i > frm.i
-        self.value = range(frm.i, end.i)
+        end = holder(to(succ))
+        # assert end.i > frm.i
+        self.value = frm(lambda x: end(lambda y: range(x, y)))
 
     def __iter__(self):
         return iter(self.value)
-
-
-def get_one():
-    ret = PositiveInteger()
-    ret.succ()
-    return ret
-
-
-def get_three():
-    ret = PositiveInteger()
-    ret.succ()
-    ret.succ()
-    ret.succ()
-    return ret
-
-
-def get_five():
-    ret = PositiveInteger()
-    ret.succ()
-    ret.succ()
-    ret.succ()
-    ret.succ()
-    ret.succ()
-    return ret
-
-
-def get_twenty():
-    ret = get_five()
-    ret.double()
-    ret.double()
-    return ret
 
 
 def print_(s):
@@ -88,22 +117,32 @@ def print_(s):
     return s
 
 
+def equal_zero(i):
+    return i == -i
+
+
+def dividable(by):
+    return lambda i: by(lambda j: equal_zero(i % j))
+
+
 def foo(i):
-    d3 = i.dividable(get_three())
-    d5 = i.dividable(get_five())
+    d3 = i(dividable(get_three()))
+    d5 = i(dividable(get_five()))
     d3 and d5 and print_("FizzBuzz") or \
     d3 and print_("Fizz") or \
     d5 and print_("Buzz") or \
-    print_(i)
+    i(print_)
 
 
-def succ_and_foo(i):
-    i.succ()
+def succ_and_foo(old_i):
+    global i
+    i = holder(old_i(succ))
     foo(i)
 
 
 def main():
-    i = PositiveInteger()
+    global i
+    i = get_zero()
     range = PositiveIntegerRange(get_one(), get_twenty())
     [succ_and_foo(i) for _i in range]
 
