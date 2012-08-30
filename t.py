@@ -88,9 +88,11 @@ def print_(s):
 
 
 def foo(i):
-    if i.dividable(get_three()) and i.dividable(get_five()): return print_("FizzBuzz")
-    if i.dividable(get_three()): return print_("Fizz")
-    if i.dividable(get_five()): return print_("Buzz")
+    d3 = i.dividable(get_three())
+    d5 = i.dividable(get_five())
+    if d3 and d5: return print_("FizzBuzz")
+    if d3: return print_("Fizz")
+    if d5: return print_("Buzz")
     print i
 
 
