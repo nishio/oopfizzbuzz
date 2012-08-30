@@ -91,10 +91,10 @@ def print_(s):
 def foo(i):
     d3 = i.dividable(get_three())
     d5 = i.dividable(get_five())
-    (d3 and d5 and print_("FizzBuzz") or
-     d3 and print_("Fizz") or
-     d5 and print_("Buzz") or
-     print_(i))
+    d3 and d5 and print_("FizzBuzz") or \
+    d3 and print_("Fizz") or \
+    d5 and print_("Buzz") or \
+    print_(i)
 
 
 def succ_and_foo(i):
