@@ -34,7 +34,7 @@ class PositiveInteger(object):
         self.i += self.i
 
     def dividable(self, by):
-        v = self.i % by
+        v = self.i % by.i
         return v == -v  # mean: v == 0
 
     def __str__(self):
@@ -53,11 +53,29 @@ class PositiveIntegerRange(object):
         return iter(self.value)
 
 
+def get_three():
+    ret = PositiveInteger()
+    ret.succ()
+    ret.succ()
+    ret.succ()
+    return ret
+
+
+def get_five():
+    ret = PositiveInteger()
+    ret.succ()
+    ret.succ()
+    ret.succ()
+    ret.succ()
+    ret.succ()
+    return ret
+
+
 def foo(i):
-    if i.dividable(3):
+    if i.dividable(get_three()):
         print "Fizz"
         return
-    if i.dividable(5):
+    if i.dividable(get_five()):
         print "Buzz"
         return
     print i
