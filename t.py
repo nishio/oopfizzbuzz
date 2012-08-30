@@ -43,14 +43,19 @@ class PositiveInteger(object):
 
 class PositiveIntegerRange(object):
     def __init__(self, frm, to):
-        end = to + 1
-        assert frm > 0
-        assert end > 0
-        assert end > frm
-        self.value = range(frm, end)
+        end = to
+        end.succ()
+        assert end.i > frm.i
+        self.value = range(frm.i, end.i)
 
     def __iter__(self):
         return iter(self.value)
+
+
+def get_one():
+    ret = PositiveInteger()
+    ret.succ()
+    return ret
 
 
 def get_three():
@@ -71,6 +76,13 @@ def get_five():
     return ret
 
 
+def get_twenty():
+    ret = get_five()
+    ret.double()
+    ret.double()
+    return ret
+
+
 def foo(i):
     if i.dividable(get_three()):
         print "Fizz"
@@ -83,7 +95,7 @@ def foo(i):
 
 def main():
     i = PositiveInteger()
-    for _i in PositiveIntegerRange(1, 20):
+    for _i in PositiveIntegerRange(get_one(), get_twenty()):
         i.succ()
         foo(i)
 
