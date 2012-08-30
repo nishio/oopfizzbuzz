@@ -105,7 +105,7 @@ def succ_and_foo(i):
 def main():
     i = PositiveInteger()
     range = PositiveIntegerRange(get_one(), get_twenty())
-    for _i in range: succ_and_foo(i)
+    [succ_and_foo(i) for _i in range]
 
 
 def _test():
