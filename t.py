@@ -23,6 +23,12 @@ Buzz
 """
 
 
+class PositiveInteger(object):
+    def __init__(self, i):
+        assert i > 0
+        self.i = i
+
+
 def foo(i):
     if i % 3 == 0:
         print "Fizz"
