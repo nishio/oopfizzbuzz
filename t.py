@@ -83,22 +83,25 @@ def get_twenty():
     return ret
 
 
+def print_(s):
+    print s
+
+
 def foo(i):
-    if i.dividable(get_three()):
-        print "Fizz"
-        return
-    if i.dividable(get_five()):
-        print "Buzz"
-        return
+    if i.dividable(get_three()): return print_("Fizz")
+    if i.dividable(get_five()): return print_("Buzz")
     print i
+
+
+def succ_and_foo(i):
+    i.succ()
+    foo(i)
 
 
 def main():
     i = PositiveInteger()
     range = PositiveIntegerRange(get_one(), get_twenty())
-    for _i in range:
-        i.succ()
-        foo(i)
+    for _i in range: succ_and_foo(i)
 
 
 def _test():
