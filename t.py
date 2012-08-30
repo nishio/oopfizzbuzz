@@ -28,12 +28,18 @@ class PositiveInteger(object):
         assert i > 0
         self.i = i
 
+    def dividable(self, by):
+        return self.i % by == 0
+
+    def __str__(self):
+        return str(self.i)
+
 
 def foo(i):
-    if i % 3 == 0:
+    if i.dividable(3):
         print "Fizz"
         return
-    if i % 5 == 0:
+    if i.dividable(5):
         print "Buzz"
         return
     print i
@@ -41,7 +47,7 @@ def foo(i):
 
 def main():
     for i in range(1, 21):
-        foo(i)
+        foo(PositiveInteger(i))
 
 
 def _test():
