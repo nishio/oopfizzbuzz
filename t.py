@@ -14,7 +14,7 @@ Buzz
 Fizz
 13
 14
-Fizz
+FizzBuzz
 16
 17
 Fizz
@@ -88,6 +88,7 @@ def print_(s):
 
 
 def foo(i):
+    if i.dividable(get_three()) and i.dividable(get_five()): return print_("FizzBuzz")
     if i.dividable(get_three()): return print_("Fizz")
     if i.dividable(get_five()): return print_("Buzz")
     print i
