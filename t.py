@@ -85,15 +85,16 @@ def get_twenty():
 
 def print_(s):
     print s
+    return s
 
 
 def foo(i):
     d3 = i.dividable(get_three())
     d5 = i.dividable(get_five())
-    if d3 and d5: return print_("FizzBuzz")
-    if d3: return print_("Fizz")
-    if d5: return print_("Buzz")
-    print i
+    (d3 and d5 and print_("FizzBuzz") or
+     d3 and print_("Fizz") or
+     d5 and print_("Buzz") or
+     print_(i))
 
 
 def succ_and_foo(i):
