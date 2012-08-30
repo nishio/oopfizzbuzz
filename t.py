@@ -24,12 +24,18 @@ Buzz
 
 
 class PositiveInteger(object):
-    def __init__(self, i):
-        assert i > 0
-        self.i = i
+    def __init__(self):
+        self.i = int(self != self)  # zero
+
+    def succ(self):
+        self.i += int(self == self)  # add one
+
+    def double(self):
+        self.i += self.i
 
     def dividable(self, by):
-        return self.i % by == 0
+        v = self.i % by
+        return v == -v  # mean: v == 0
 
     def __str__(self):
         return str(self.i)
@@ -58,8 +64,10 @@ def foo(i):
 
 
 def main():
-    for i in PositiveIntegerRange(1, 20):
-        foo(PositiveInteger(i))
+    i = PositiveInteger()
+    for _i in PositiveIntegerRange(1, 20):
+        i.succ()
+        foo(i)
 
 
 def _test():
