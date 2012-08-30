@@ -35,6 +35,18 @@ class PositiveInteger(object):
         return str(self.i)
 
 
+class PositiveIntegerRange(object):
+    def __init__(self, frm, to):
+        end = to + 1
+        assert frm > 0
+        assert end > 0
+        assert end > frm
+        self.value = range(frm, end)
+
+    def __iter__(self):
+        return iter(self.value)
+
+
 def foo(i):
     if i.dividable(3):
         print "Fizz"
@@ -46,7 +58,7 @@ def foo(i):
 
 
 def main():
-    for i in range(1, 21):
+    for i in PositiveIntegerRange(1, 20):
         foo(PositiveInteger(i))
 
 
