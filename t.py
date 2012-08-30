@@ -24,9 +24,7 @@ Buzz
 
 
 def holder(x):
-    def use(f):
-        return f(x)
-    return use
+    return lambda f: f(x)
 
 
 def get_zero():
