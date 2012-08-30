@@ -95,7 +95,8 @@ def foo(i):
 
 def main():
     i = PositiveInteger()
-    for _i in PositiveIntegerRange(get_one(), get_twenty()):
+    range = PositiveIntegerRange(get_one(), get_twenty())
+    for _i in range:
         i.succ()
         foo(i)
 
