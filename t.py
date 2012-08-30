@@ -102,7 +102,7 @@ def get_twenty():
 
 def positiveIntegerRange(frm, to):
     end = holder(to(succ))
-    # assert end.i > frm.i
+    assert end(lambda x: frm(lambda y: x > y))
     value = frm(lambda x: end(lambda y: range(x, y)))
     return iter(value)
 
